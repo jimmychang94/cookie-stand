@@ -111,3 +111,31 @@ var capitolHill = {
 capitolHill.calcCust();
 capitolHill.calcCookies();
 capitolHill.calcTotalCookies();
+
+var alki = {
+  name: 'Alki',
+  minCust: 2,
+  maxCust: 16,
+  avgCookies: 4.6,
+  custPerHour: [],
+  calcCust: function() {
+    for (var i = 0; i < hour.length; i ++) {
+      this.custPerHour.push(Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust);
+    }
+  },
+  cookiesPerHour: [],
+  calcCookies: function() {
+    for (var i = 0; i < this.custPerHour.length; i ++) {
+      this.cookiesPerHour.push(Math.floor(this.avgCookies * this.custPerHour[i]));
+    }
+  },
+  totalCookies: 0,
+  calcTotalCookies: function() {
+    for (var i = 0; i < this.custPerHour.length; i ++) {
+      this.totalCookies += this.cookiesPerHour[i];
+    }
+  }
+};
+alki.calcCust();
+alki.calcCookies();
+alki.calcTotalCookies();
