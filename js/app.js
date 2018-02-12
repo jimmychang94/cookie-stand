@@ -55,6 +55,7 @@ var seatac = {
 seatac.calcCust();
 seatac.calcCookies();
 seatac.calcTotalCookies();
+
 var seattleCenter = {
   name: 'Seattle Center',
   minCust: 11,
@@ -82,3 +83,31 @@ var seattleCenter = {
 seattleCenter.calcCust();
 seattleCenter.calcCookies();
 seattleCenter.calcTotalCookies();
+
+var capitolHill = {
+  name: 'Capitol Hill',
+  minCust: 20,
+  maxCust: 38,
+  avgCookies: 2.3,
+  custPerHour: [],
+  calcCust: function() {
+    for (var i = 0; i < hour.length; i ++) {
+      this.custPerHour.push(Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust);
+    }
+  },
+  cookiesPerHour: [],
+  calcCookies: function() {
+    for (var i = 0; i < this.custPerHour.length; i ++) {
+      this.cookiesPerHour.push(Math.floor(this.avgCookies * this.custPerHour[i]));
+    }
+  },
+  totalCookies: 0,
+  calcTotalCookies: function() {
+    for (var i = 0; i < this.custPerHour.length; i ++) {
+      this.totalCookies += this.cookiesPerHour[i];
+    }
+  }
+};
+capitolHill.calcCust();
+capitolHill.calcCookies();
+capitolHill.calcTotalCookies();
