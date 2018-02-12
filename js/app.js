@@ -64,11 +64,23 @@ var seatac = {
     for (var i = 0; i < this.cookiesPerHour.length; i ++) {
       this.totalCookies += this.cookiesPerHour[i];
     }
+  },
+  render: function() {
+    var ulEl = document.getElementById('seatacStore');
+    for (var i = 0; i < this.cookiesPerHour.length; i ++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = hour[i] + ': ' + this.cookiesPerHour[i] + ' cookies';
+      ulEl.appendChild(liEl);
+    }
+    var liEl2 = document.createElement('li');
+    liEl2.textContent = 'Total: ' + this.totalCookies + ' cookies';
+    ulEl.appendChild(liEl2);
   }
 };
 seatac.calcCust();
 seatac.calcCookies();
 seatac.calcTotalCookies();
+seatac.render();
 
 //Seattle Center
 var seattleCenter = {
@@ -93,11 +105,23 @@ var seattleCenter = {
     for (var i = 0; i < this.cookiesPerHour.length; i ++) {
       this.totalCookies += this.cookiesPerHour[i];
     }
+  },
+  render: function() {
+    var ulEl = document.getElementById('seattleCenterStore');
+    for (var i = 0; i < this.cookiesPerHour.length; i ++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = hour[i] + ': ' + this.cookiesPerHour[i] + ' cookies';
+      ulEl.appendChild(liEl);
+    }
+    var liEl2 = document.createElement('li');
+    liEl2.textContent = 'Total: ' + this.totalCookies + ' cookies';
+    ulEl.appendChild(liEl2);
   }
 };
 seattleCenter.calcCust();
 seattleCenter.calcCookies();
 seattleCenter.calcTotalCookies();
+seattleCenter.render();
 
 //Capitol Hill
 var capitolHill = {
@@ -122,11 +146,23 @@ var capitolHill = {
     for (var i = 0; i < this.cookiesPerHour.length; i ++) {
       this.totalCookies += this.cookiesPerHour[i];
     }
+  },
+  render: function() {
+    var ulEl = document.getElementById('capitolHillStore');
+    for (var i = 0; i < this.cookiesPerHour.length; i ++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = hour[i] + ': ' + this.cookiesPerHour[i] + ' cookies';
+      ulEl.appendChild(liEl);
+    }
+    var liEl2 = document.createElement('li');
+    liEl2.textContent = 'Total: ' + this.totalCookies + ' cookies';
+    ulEl.appendChild(liEl2);
   }
 };
 capitolHill.calcCust();
 capitolHill.calcCookies();
 capitolHill.calcTotalCookies();
+capitolHill.render();
 
 //Alki
 var alki = {
@@ -151,8 +187,20 @@ var alki = {
     for (var i = 0; i < this.cookiesPerHour.length; i ++) {
       this.totalCookies += this.cookiesPerHour[i];
     }
+  },
+  render: function() {
+    var ulEl = document.getElementById('alkiStore');
+    for (var i = 0; i < this.cookiesPerHour.length; i ++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = hour[i] + ': ' + this.cookiesPerHour[i] + ' cookies';
+      ulEl.appendChild(liEl);
+    }
+    var liEl2 = document.createElement('li');
+    liEl2.textContent = 'Total: ' + this.totalCookies + ' cookies';
+    ulEl.appendChild(liEl2);
   }
 };
 alki.calcCust();
 alki.calcCookies();
 alki.calcTotalCookies();
+alki.render();
