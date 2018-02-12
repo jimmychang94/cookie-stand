@@ -55,3 +55,30 @@ var seatac = {
 seatac.calcCust();
 seatac.calcCookies();
 seatac.calcTotalCookies();
+var seattleCenter = {
+  name: 'Seattle Center',
+  minCust: 11,
+  maxCust: 38,
+  avgCookies: 3.7,
+  custPerHour: [],
+  calcCust: function() {
+    for (var i = 0; i < hour.length; i ++) {
+      this.custPerHour.push(Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust);
+    }
+  },
+  cookiesPerHour: [],
+  calcCookies: function() {
+    for (var i = 0; i < this.custPerHour.length; i ++) {
+      this.cookiesPerHour.push(Math.floor(this.avgCookies * this.custPerHour[i]));
+    }
+  },
+  totalCookies: 0,
+  calcTotalCookies: function() {
+    for (var i = 0; i < this.custPerHour.length; i ++) {
+      this.totalCookies += this.cookiesPerHour[i];
+    }
+  }
+};
+seattleCenter.calcCust();
+seattleCenter.calcCookies();
+seattleCenter.calcTotalCookies();
