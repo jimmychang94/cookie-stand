@@ -7,24 +7,24 @@ var pike = {
   maxCust: 65,
   avgCookies: 6.3,
   custPerHour: [],
-  calcCust: function() {
+  calcCust: function() { //Calculates the number of customers with a random integer using a min/max
     for (var i = 0; i < hour.length; i ++) {
       this.custPerHour.push(Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust);
     }
   },
   cookiesPerHour: [],
-  calcCookies: function() {
+  calcCookies: function() { //Calculates the number of cookies sold (rounded down) based off of the number of customers
     for (var i = 0; i < this.custPerHour.length; i ++) {
       this.cookiesPerHour.push(Math.floor(this.avgCookies * this.custPerHour[i]));
     }
   },
   totalCookies: 0,
-  calcTotalCookies: function() {
+  calcTotalCookies: function() { //Calculates the total number of cookies sold in that day
     for (var i = 0; i < this.cookiesPerHour.length; i ++) {
       this.totalCookies += this.cookiesPerHour[i];
     }
   },
-  render: function() {
+  render: function() { //Puts the information onto the webpage
     var ulEl = document.getElementById('pikeStore');
     for (var i = 0; i < this.cookiesPerHour.length; i ++) {
       var liEl = document.createElement('li');
