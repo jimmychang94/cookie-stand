@@ -30,7 +30,7 @@ img {
 #location {
   margin-left: 45%;
   font-size: 100%;
-  font-size: 1vw;
+  font-size: 1.2vw;
   color: blue;
 }
 #h2location {
@@ -49,7 +49,7 @@ img {
   background-color: yellow;
 }
 
-h2 {
+.salesHeader {
   text-align: center;
   font-family: 'Gloria Hallelujah';
 }
