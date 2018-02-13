@@ -1,0 +1,44 @@
+body {
+  background-color: salmon;
+}
+
+header {
+  text-align: center;
+  font-size: 100%;
+  font-size: 1vw;
+  color: maroon;
+}
+img {
+   position: relative;
+   width: 50%;
+   opacity: 0.5;
+}
+
+h1 {
+  margin: 0px;
+  margin-top: -8%;
+  margin-left: 40%;
+  position: absolute;
+}
+
+h3 {
+  margin: 0px;
+  margin-top: -6%;
+  margin-left: 42%;
+  position: absolute;
+}
+#location {
+  margin-left: 45%;
+  font-size: 100%;
+  font-size: 1vw;
+  color: blue;
+}
+#h2location {
+  margin-left: 5%;
+}
+#history {
+  margin-left: 25%;
+  margin-top: 5%;
+  width: 50%;
+  color: darkgreen;
+}
