@@ -1,5 +1,88 @@
 var hour = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM'];
+var storeLocation = [];
 
+function generateRandomNumber(min, max) {
+  var randomNumber = Math.random();
+  var randomInteger = Math.floor(randomNumber * (max - min + 1)) + min;
+  return randomInteger;
+}
+
+function tableHeader() {
+  var theadEl = document.getElementById('time');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'Locations';
+  theadEl.appendChild(thEl);
+  for (var i = 0; i < hour.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hour[i];
+    theadEl.appendChild(thEl);
+  }
+  thEl = document.createElement('th');
+  thEl.textContent = 'Location Totals';
+  theadEl.appendChild(thEl);
+}
+
+function renderStore () {
+  for(var j = 0; j < storeLocation.length; j ++) {
+    storeLocation[j].render();
+  }
+}
+function CookieStand(name, idName, minCust, maxCust, avgCookies) {
+  this.name = name;
+  this.idName = idName;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookies = avgCookies;
+  this.custPerHour = [];
+  this.cookiesPerHour = [];
+  this.totalCookies = 0;
+  storeLocation.push(this);
+}
+CookieStand.prototype.calcCust = function() {
+  //Calculates the number of customers with a random integer using a min/max
+  for (var i = 0; i < hour.length; i ++) {
+    var hourlyCustomers = generateRandomNumber(this.minCust, this.maxCust);
+    this.custPerHour.push(hourlyCustomers);
+  }
+};
+CookieStand.prototype.calcCookies = function() {
+  //Calculates the number of cookies sold (rounded down) based off of the number of customers
+  this.calcCust();
+  //Because I need to have the custPerHour array filled, call the calcCust function to populate it.
+  for (var i = 0; i < hour.length; i ++) {
+    var hourlyCookies = Math.ceil(this.avgCookies * this.custPerHour[i]);
+    this.cookiesPerHour.push(hourlyCookies);
+    this.totalCookies += hourlyCookies;
+    //This calculates the total number of cookies based off of the number of cookies sold per hour.
+  }
+};
+CookieStand.prototype.render = function() { //Puts the information onto the webpage
+  this.calcCookies(); //runs calcCookies for
+  var trEl = document.getElementById(this.idName);
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+  for (var i = 0; i < hour.length; i ++) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.cookiesPerHour[i];
+    trEl.appendChild(tdEl);
+  }
+  tdEl = document.createElement('td');
+  tdEl.className = 'total';
+  tdEl.textContent = this.totalCookies;
+  trEl.appendChild(tdEl);
+};
+
+new CookieStand('1st and Pike','pikeStore', 23, 65, 6.3);
+new CookieStand('SeaTac Airport', 'seatacStore', 3, 24, 1.2);
+new CookieStand('Seattle Center', 'seattleCenterStore', 11, 38, 3.7);
+new CookieStand('Capitol Hill', 'capitolHillStore', 20, 38, 2.3);
+new CookieStand('Alki', 'alkiStore', 2, 16, 4.6);
+
+tableHeader();
+renderStore();
+
+/*
 //1st and Pike
 var pike = {
   name: '1st and Pike',
@@ -204,3 +287,4 @@ alki.calcCust();
 alki.calcCookies();
 alki.calcTotalCookies();
 alki.render();
+*/
