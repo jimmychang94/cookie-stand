@@ -42,3 +42,15 @@ h3 {
   width: 50%;
   color: darkgreen;
 }
+.total {
+  font-weight: bold;
+}
+table {
+  text-align: center;
+}
+th {
+  padding: .2em;
+}
+td {
+  padding: .2em;
+}
