@@ -46,11 +46,20 @@ h3 {
   font-weight: bold;
 }
 table {
+  background-color: #EAAEFF;
+  border: 5px solid black;
   text-align: center;
 }
-th {
-  padding: .2em;
-}
+
 td {
   padding: .2em;
+  border-radius: 15px;
+  border: 1px solid black;
+  background-color: burlywood;
+}
+
+th {
+  padding: .2em;
+  background-color: navy;
+  color: white;
 }
