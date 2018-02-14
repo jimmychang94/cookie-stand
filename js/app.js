@@ -40,18 +40,12 @@ function calcHourlyTotal () {
   for (var i = 0; i < hour.length; i ++) {
     var hourlyTotal = 0;
     for (var j = 0; j < storeLocation.length; j ++) {
-      // console.log(storeLocation[j].cookiesPerHour[i]);
       hourlyTotal += storeLocation[j].cookiesPerHour[i];
-      // console.log(hourlyTotal);
     }
     hourlyTotalArray.push(hourlyTotal);
   }
-  // console.log(hourlyTotalArray);
-}
-
-function calcAbsoluteTotal () {
-  //Calculates the total amount of cookies sold that day
-  for (var i = 0; i < storeLocation.length; i ++) {
+  //Calculate the total amount of cookies sold that day
+  for (i = 0; i < storeLocation.length; i ++) {
     absoluteTotal += storeLocation[i].totalCookies;
   }
 }
@@ -59,8 +53,7 @@ function calcAbsoluteTotal () {
 function renderHourlyTotal () {
   //Writes the final row of totals for each hour into the table
   calcHourlyTotal();
-  calcAbsoluteTotal();
-  //Calls these 2 functions to calculate the hourly and absolute total values
+  //Calls this function to calculate the hourly and absolute total values
   var trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
   tdEl.textContent = 'Hourly Totals';
@@ -76,8 +69,6 @@ function renderHourlyTotal () {
   trEl.appendChild(tdEl);
   salmonCookiesTable.appendChild(trEl);
 }
-
-
 
 function renderTosser() {
   tableHeader(salmonTosserTable);
