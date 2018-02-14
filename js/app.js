@@ -2,39 +2,18 @@ var hour = ['6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '
 var storeLocation = [];
 var salmonCookiesTable = document.getElementById('salmonCookies');
 var salmonTosserTable = document.getElementById('salmonTossers');
+var cookieForm = document.getElementById('cookieForm');
 var hourlyTotalArray = [];
 var absoluteTotal = 0;
 
+// ------------------------------------------------------------------------
 function generateRandomNumber(min, max) {
   var randomNumber = Math.random();
   var randomInteger = Math.floor(randomNumber * (max - min + 1)) + min;
   return randomInteger;
 }
 
-function tableHeader(id) {
-  var theadEl = document.createElement('thead');
-  var thEl = document.createElement('th');
-  thEl.textContent = 'Locations';
-  theadEl.appendChild(thEl);
-  for (var i = 0; i < hour.length; i++) {
-    thEl = document.createElement('th');
-    thEl.textContent = hour[i];
-    theadEl.appendChild(thEl);
-  }
-  thEl = document.createElement('th');
-  thEl.textContent = 'Location Totals';
-  theadEl.appendChild(thEl);
-  id.appendChild(theadEl);
-}
-
-function renderStore () {
-  tableHeader(salmonCookiesTable);
-  for(var j = 0; j < storeLocation.length; j ++) {
-    storeLocation[j].render();
-  }
-  renderHourlyTotal();
-}
-
+// ------------------------------------------------------------------------
 function calcHourlyTotal () {
   //Calculates the total amount of cookies sold that hour
   for (var i = 0; i < hour.length; i ++) {
@@ -50,6 +29,7 @@ function calcHourlyTotal () {
   }
 }
 
+// ------------------------------------------------------------------------
 function renderHourlyTotal () {
   //Writes the final row of totals for each hour into the table
   calcHourlyTotal();
@@ -70,7 +50,36 @@ function renderHourlyTotal () {
   salmonCookiesTable.appendChild(trEl);
 }
 
+// ------------------------------------------------------------------------
+function tableHeader(id) {
+  var theadEl = document.createElement('thead');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'Locations';
+  theadEl.appendChild(thEl);
+  for (var i = 0; i < hour.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hour[i];
+    theadEl.appendChild(thEl);
+  }
+  thEl = document.createElement('th');
+  thEl.textContent = 'Location Totals';
+  theadEl.appendChild(thEl);
+  id.appendChild(theadEl);
+}
+
+// ------------------------------------------------------------------------
+function renderStore () {
+  salmonCookiesTable.textContent = '';
+  tableHeader(salmonCookiesTable);
+  for(var j = 0; j < storeLocation.length; j ++) {
+    storeLocation[j].render();
+  }
+  renderHourlyTotal();
+}
+
+// ------------------------------------------------------------------------
 function renderTosser() {
+  salmonTosserTable.textContent = '';
   tableHeader(salmonTosserTable);
   for (var i = 0; i < storeLocation.length; i ++) {
     storeLocation[i].calcTosser(); //Gets the tossers per hour
@@ -95,6 +104,7 @@ function renderTosser() {
   }
 }
 
+// ------------------------------------------------------------------------
 function CookieStand(name, minCust, maxCust, avgCookies) {
   this.name = name;
   this.minCust = minCust;
@@ -156,11 +166,51 @@ CookieStand.prototype.render = function() { //Puts the information onto the webp
   salmonCookiesTable.appendChild(trEl);
 };
 
+// ------------------------------------------------------------------------
 new CookieStand('1st and Pike', 23, 65, 6.3);
 new CookieStand('SeaTac Airport', 3, 24, 1.2);
 new CookieStand('Seattle Center', 11, 38, 3.7);
 new CookieStand('Capitol Hill', 20, 38, 2.3);
 new CookieStand('Alki', 2, 16, 4.6);
+
+// ------------------------------------------------------------------------
+
+function storeSubmit(event) {
+
+  event.preventDefault();
+
+  //Validation to prevent empty form fields
+  var storeName = event.target.storeName.value;
+  var minimumCustomers = parseInt(event.target.minimumCustomers.value);
+  var maximumCustomers = parseInt(event.target.maximumCustomers.value);
+  var averageCookies = Number(event.target.averageCookies.value);
+  // console.log(minimumCustomers);
+
+  //Validation to prevent empty form fields or not giving numerical values for the last 3 form fields
+  if (!storeName || !minimumCustomers || !maximumCustomers || !averageCookies) {
+    alert('Fields cannot be empty!');
+    // console.log('You pressed the submit button without any information!');
+  }
+
+  //Validation for logic (minimum value cannot be larger than maximum value)
+  if (minimumCustomers > maximumCustomers) {
+    alert('The minimum customers cannot be more than the maximum customers!');
+    // console.log('You pressed the submit button!');
+  }
+
+  new CookieStand(storeName, minimumCustomers, maximumCustomers, averageCookies);
+
+  // This empties the form fields after the data has been grabbed
+  event.target.reset();
+
+  renderStore();
+  renderTosser();
+}
+
+// ------------------------------------------------------------------------
+
+cookieForm.addEventListener('submit', storeSubmit);
+// ------------------------------------------------------------------------
 
 renderStore();
 renderTosser();

@@ -11,11 +11,30 @@
   <link rel="stylesheet" type="text/css" media= "screen" href="css/style.css">
 </head>
 <body>
+  <form id="cookieForm">
+    <fieldset>
+      <h2>Add additional Information</h2>
+      <label for="storeName">Name: </label>
+      <input id="storeName" type="text" />
+
+      <label for="minimumCustomers">Minimum Customers: </label>
+      <input id="minimumCustomers" type="text" />
+
+      <label for="maximumCustomers">Maximum Customers: </label>
+      <input id="maximumCustomers" type="text" />
+      
+      <label for="averageCookies">Average Cookies Sold: </label>
+      <input id="averageCookies" type="text" />
+
+      <button type="submit">Submit</button>
+    </fieldset>
+  </form>
+  
   <h2 class="salesHeader">Our Sales for Today</h2>
   <table id="salmonCookies"></table>
 
   <h2 class="salesHeader">Staff Needed for Today</h2>
   <table id="salmonTossers"></table>
-  <script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
