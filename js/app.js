@@ -16,6 +16,7 @@ function generateRandomNumber(min, max) {
 // ------------------------------------------------------------------------
 function calcHourlyTotal () {
   //Calculates the total amount of cookies sold that hour
+  absoluteTotal = 0;
   for (var i = 0; i < hour.length; i ++) {
     var hourlyTotal = 0;
     for (var j = 0; j < storeLocation.length; j ++) {
@@ -48,6 +49,32 @@ function renderHourlyTotal () {
   tdEl.textContent = absoluteTotal;
   trEl.appendChild(tdEl);
   salmonCookiesTable.appendChild(trEl);
+}
+
+// -----------------------------------------------------------------------
+function renderHourlyTosserTotal () {
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = 'Hourly Totals';
+  trEl.appendChild(tdEl);
+  for (var i = 0; i < hour.length; i ++) {
+    tdEl = document.createElement('td');
+    var hourlyTotal = 0;
+    for (var j = 0; j < storeLocation.length; j ++) {
+      hourlyTotal += storeLocation[j].cookieTosserPerHour[i];
+    }
+    tdEl.textContent = hourlyTotal;
+    trEl.appendChild(tdEl);
+  }
+  var absoluteTotalTosser = 0;
+  for (i = 0; i < storeLocation.length; i ++) {
+    absoluteTotalTosser += storeLocation[i].totalTosser;
+  }
+  tdEl = document.createElement('td');
+  tdEl.textContent = absoluteTotalTosser;
+  tdEl.className = 'total';
+  trEl.appendChild(tdEl);
+  salmonTosserTable.appendChild(trEl);
 }
 
 // ------------------------------------------------------------------------
@@ -102,6 +129,7 @@ function renderTosser() {
     trEl.appendChild(tdEl);
     salmonTosserTable.appendChild(trEl);
   }
+  renderHourlyTosserTotal();
 }
 
 // ------------------------------------------------------------------------
@@ -126,6 +154,7 @@ CookieStand.prototype.calcCust = function() {
 };
 CookieStand.prototype.calcTosser = function() {
   this.calcCust();
+  this.totalTosser = 0;
   for (var i = 0; i < hour.length; i ++) {
     var cookieTosserNeeded = Math.ceil(this.custPerHour[i] / 20);
     if (cookieTosserNeeded < 2) {
@@ -139,6 +168,7 @@ CookieStand.prototype.calcTosser = function() {
 CookieStand.prototype.calcCookies = function() {
   //Calculates the number of cookies sold (rounded down) based off of the number of customers
   this.calcCust();
+  this.totalCookies = 0;
   //Because I need to have the custPerHour array filled, call the calcCust function to populate it.
   for (var i = 0; i < hour.length; i ++) {
     var hourlyCookies = Math.ceil(this.avgCookies * this.custPerHour[i]);
@@ -190,12 +220,14 @@ function storeSubmit(event) {
   if (!storeName || !minimumCustomers || !maximumCustomers || !averageCookies) {
     alert('Fields cannot be empty!');
     // console.log('You pressed the submit button without any information!');
+    return;
   }
 
   //Validation for logic (minimum value cannot be larger than maximum value)
   if (minimumCustomers > maximumCustomers) {
     alert('The minimum customers cannot be more than the maximum customers!');
     // console.log('You pressed the submit button!');
+    return;
   }
 
   new CookieStand(storeName, minimumCustomers, maximumCustomers, averageCookies);
