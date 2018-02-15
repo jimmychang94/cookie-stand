@@ -232,13 +232,12 @@ function storeSubmit(event) {
     // console.log('You pressed the submit button!');
     return;
   }
-  
+
   new CookieStand(storeName, minimumCustomers, maximumCustomers, averageCookies);
   var x = storeLocation.length - 1;
   for (var i = 0; i < x; i ++) {
     if (storeName === storeLocation[i].name) {
       storeLocation[i] = storeLocation.pop();
-
     }
   }
 
