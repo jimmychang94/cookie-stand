@@ -17,6 +17,7 @@ function generateRandomNumber(min, max) {
 function calcHourlyTotal () {
   //Calculates the total amount of cookies sold that hour
   absoluteTotal = 0;
+  hourlyTotalArray = [];
   for (var i = 0; i < hour.length; i ++) {
     var hourlyTotal = 0;
     for (var j = 0; j < storeLocation.length; j ++) {
@@ -109,7 +110,6 @@ function renderTosser() {
   salmonTosserTable.textContent = '';
   tableHeader(salmonTosserTable);
   for (var i = 0; i < storeLocation.length; i ++) {
-    storeLocation[i].calcTosser(); //Gets the tossers per hour
 
     var trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
@@ -143,17 +143,21 @@ function CookieStand(name, minCust, maxCust, avgCookies) {
   this.cookiesPerHour = [];
   this.totalCookies = 0;
   this.totalTosser = 0;
+  this.calcCust();
+  this.calcCookies();
+  this.calcTosser();
   storeLocation.push(this);
 }
 CookieStand.prototype.calcCust = function() {
   //Calculates the number of customers with a random integer using a min/max
+  this.custPerHour = [];
   for (var i = 0; i < hour.length; i ++) {
     var hourlyCustomers = generateRandomNumber(this.minCust, this.maxCust);
     this.custPerHour.push(hourlyCustomers);
   }
 };
 CookieStand.prototype.calcTosser = function() {
-  this.calcCust();
+  this.cookieTosserPerHour = [];
   this.totalTosser = 0;
   for (var i = 0; i < hour.length; i ++) {
     var cookieTosserNeeded = Math.ceil(this.custPerHour[i] / 20);
@@ -167,7 +171,7 @@ CookieStand.prototype.calcTosser = function() {
 };
 CookieStand.prototype.calcCookies = function() {
   //Calculates the number of cookies sold (rounded down) based off of the number of customers
-  this.calcCust();
+  this.cookiesPerHour = [];
   this.totalCookies = 0;
   //Because I need to have the custPerHour array filled, call the calcCust function to populate it.
   for (var i = 0; i < hour.length; i ++) {
@@ -178,7 +182,6 @@ CookieStand.prototype.calcCookies = function() {
   }
 };
 CookieStand.prototype.render = function() { //Puts the information onto the webpage
-  this.calcCookies(); //runs calcCookies to get the cookies per hour
 
   var trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
@@ -229,8 +232,15 @@ function storeSubmit(event) {
     // console.log('You pressed the submit button!');
     return;
   }
-
+  
   new CookieStand(storeName, minimumCustomers, maximumCustomers, averageCookies);
+  var x = storeLocation.length - 1;
+  for (var i = 0; i < x; i ++) {
+    if (storeName === storeLocation[i].name) {
+      storeLocation[i] = storeLocation.pop();
+
+    }
+  }
 
   // This empties the form fields after the data has been grabbed
   event.target.reset();
