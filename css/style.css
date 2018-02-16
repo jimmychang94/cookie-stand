@@ -9,6 +9,7 @@ body {
 header {
   text-align: center;
   font-size: 100%;
+  font-family: 'Sarala';
   font-size: 1vw;
   color: maroon;
 }
@@ -101,7 +102,7 @@ table {
   background-color: #EAAEFF;
   border: 5px solid black;
   text-align: center;
-  font-family: Sarala;
+  font-family: 'Sarala';
   margin: auto;
 }
 
