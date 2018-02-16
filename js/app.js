@@ -9,6 +9,15 @@ var hourlyTotalArray = [];
 var absoluteTotal = 0;
 
 // ------------------------------------------------------------------------
+function newElement(elementType, content, parent, classIfNeeded) {
+  // This makes 3 lines of code into 1 line
+  var newEl = document.createElement(elementType);
+  newEl.textContent = content;
+  newEl.className = classIfNeeded;
+  parent.appendChild(newEl);
+}
+
+// ------------------------------------------------------------------------
 function CookieStand(name, minCust, maxCust, avgCookies) {
   this.name = name;
   this.minCust = minCust;
@@ -60,18 +69,11 @@ CookieStand.prototype.calcCookies = function() {
 CookieStand.prototype.render = function() { //Puts the information onto the webpage
 
   var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
-  tdEl.textContent = this.name;
-  trEl.appendChild(tdEl);
+  newElement('td', this.name, trEl);
   for (var i = 0; i < hour.length; i ++) {
-    tdEl = document.createElement('td');
-    tdEl.textContent = this.cookiesPerHour[i];
-    trEl.appendChild(tdEl);
+    newElement('td', this.cookiesPerHour[i], trEl);
   }
-  tdEl = document.createElement('td');
-  tdEl.className = 'total';
-  tdEl.textContent = this.totalCookies;
-  trEl.appendChild(tdEl);
+  newElement('td', this.totalCookies, trEl, 'total');
   salmonCookiesTable.appendChild(trEl);
 };
 
@@ -106,61 +108,41 @@ CookieStand.renderHourlyTotal = function() {
   CookieStand.calcHourlyTotal();
   //Calls this function to calculate the hourly and absolute total values
   var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
-  tdEl.textContent = 'Hourly Totals';
-  trEl.appendChild(tdEl);
+  newElement('td', 'Hourly Totals', trEl);
   for (var i = 0; i < hour.length; i ++) {
-    tdEl = document.createElement('td');
-    tdEl.textContent = hourlyTotalArray[i];
-    trEl.appendChild(tdEl);
+    newElement('td', hourlyTotalArray[i], trEl);
   }
-  tdEl = document.createElement('td');
-  tdEl.className = 'total';
-  tdEl.textContent = absoluteTotal;
-  trEl.appendChild(tdEl);
+  newElement('td', absoluteTotal, trEl, 'total');
   salmonCookiesTable.appendChild(trEl);
 };
 
 // -----------------------------------------------------------------------
 CookieStand.renderHourlyTosserTotal = function() {
   var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
-  tdEl.textContent = 'Hourly Totals';
-  trEl.appendChild(tdEl);
+  newElement('td', 'Hourly Totals', trEl);
   for (var i = 0; i < hour.length; i ++) {
-    tdEl = document.createElement('td');
     var hourlyTotal = 0;
     for (var j = 0; j < storeLocation.length; j ++) {
       hourlyTotal += storeLocation[j].cookieTosserPerHour[i];
     }
-    tdEl.textContent = hourlyTotal;
-    trEl.appendChild(tdEl);
+    newElement('td', hourlyTotal, trEl);
   }
   var absoluteTotalTosser = 0;
   for (i = 0; i < storeLocation.length; i ++) {
     absoluteTotalTosser += storeLocation[i].totalTosser;
   }
-  tdEl = document.createElement('td');
-  tdEl.textContent = absoluteTotalTosser;
-  tdEl.className = 'total';
-  trEl.appendChild(tdEl);
+  newElement('td', absoluteTotalTosser, trEl, 'total');
   salmonTosserTable.appendChild(trEl);
 };
 
 // ------------------------------------------------------------------------
 CookieStand.tableHeader = function(id) {
   var theadEl = document.createElement('thead');
-  var thEl = document.createElement('th');
-  thEl.textContent = 'Locations';
-  theadEl.appendChild(thEl);
+  newElement('th', 'Locations', theadEl);
   for (var i = 0; i < hour.length; i++) {
-    thEl = document.createElement('th');
-    thEl.textContent = hour[i];
-    theadEl.appendChild(thEl);
+    newElement('th', hour[i], theadEl);
   }
-  thEl = document.createElement('th');
-  thEl.textContent = 'Location Totals';
-  theadEl.appendChild(thEl);
+  newElement('th', 'Location Totals', theadEl);
   id.appendChild(theadEl);
 };
 
@@ -179,23 +161,17 @@ CookieStand.renderTosser = function() {
   salmonTosserTable.textContent = '';
   CookieStand.tableHeader(salmonTosserTable);
   for (var i = 0; i < storeLocation.length; i ++) {
-
     var trEl = document.createElement('tr');
-    var tdEl = document.createElement('td');
-    tdEl.textContent = storeLocation[i].name;
-    trEl.appendChild(tdEl);
+    newElement('td', storeLocation[i].name, trEl);
     for (var j = 0; j < hour.length; j ++) {
-      tdEl = document.createElement('td');
-      tdEl.textContent = storeLocation[i].cookieTosserPerHour[j];
       if (storeLocation[i].cookieTosserPerHour[j] > 2) {
-        tdEl.className = 'extraTossers';
+        var extraTossers = 'extraTossers';
+      } else {
+        extraTossers = '';
       }
-      trEl.appendChild(tdEl);
+      newElement('td', storeLocation[i].cookieTosserPerHour[j], trEl, extraTossers);
     }
-    tdEl = document.createElement('td');
-    tdEl.className = 'total';
-    tdEl.textContent = storeLocation[i].totalTosser;
-    trEl.appendChild(tdEl);
+    newElement('td', storeLocation[i].totalTosser, trEl, 'total');
     salmonTosserTable.appendChild(trEl);
   }
   CookieStand.renderHourlyTosserTotal();
