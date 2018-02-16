@@ -1,5 +1,9 @@
+/* * {
+  outline: 2px dashed blue;
+} */
+
 body {
-  background-color: salmon;
+  text-align: center;
 }
 
 header {
@@ -8,10 +12,41 @@ header {
   font-size: 1vw;
   color: maroon;
 }
-img {
-   position: relative;
-   width: 50%;
-   opacity: 0.5;
+
+
+header img {
+  position: relative;
+  width: 50%;
+  opacity: 0.5;
+}
+
+footer {
+  /* outline: 2px dashed orange; */
+  text-align: center;
+}
+
+footer li {
+  font-family: 'Gloria Hallelujah';
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 2px;
+  /* border: 2px solid black; */
+}
+
+footer li ul {
+  margin-left: -35px;
+}
+
+footer li li {
+  border: 2px solid black;
+  text-align: center;
+  margin: 5px;
+  
+}
+
+footer li li:hover {
+  background-color: salmon;
 }
 
 #indexTitle {
@@ -27,24 +62,32 @@ img {
   margin-left: 42%;
   position: absolute;
 }
-#location {
-  margin-left: 45%;
-  font-size: 100%;
-  font-size: 1.2vw;
-  color: blue;
-}
-#h2location {
-  margin-left: 5%;
-}
-#history {
+
+section {
   margin-left: 25%;
   margin-top: 5%;
   width: 50%;
+
+}
+#history {
   color: darkgreen;
 }
+
+.products {
+  color: red;
+  margin-left: 32.5%;
+  width: 35%;
+}
+
+.futureProducts {
+  color: midnightblue;
+}
+
+/* For the Sales HTML */
 .total {
   font-weight: bold;
 }
+
 .extraTossers {
   background-color: yellow;
 }
