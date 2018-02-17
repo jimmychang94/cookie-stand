@@ -4,50 +4,22 @@
 
 body {
   text-align: center;
+  background-color: lightskyblue;
+  font-size: 100%;
+  font-size: 1vw;
 }
-
+/* Header */
 header {
   text-align: center;
-  font-size: 100%;
-  font-family: 'Sarala';
-  font-size: 1vw;
   color: maroon;
+  background-color: beige;
+  margin-bottom: -1.3%;
 }
-
 
 header img {
   position: relative;
   width: 50%;
   opacity: 0.5;
-}
-
-footer {
-  /* outline: 2px dashed orange; */
-  text-align: center;
-}
-
-footer li {
-  font-family: 'Gloria Hallelujah';
-  position: relative;
-  display: inline-block;
-  margin: 0;
-  padding: 2px;
-  /* border: 2px solid black; */
-}
-
-footer li ul {
-  margin-left: -35px;
-}
-
-footer li li {
-  border: 2px solid black;
-  text-align: center;
-  margin: 5px;
-  
-}
-
-footer li li:hover {
-  background-color: salmon;
 }
 
 #indexTitle {
@@ -60,28 +32,90 @@ footer li li:hover {
 #indexSubTitle {
   margin: 0px;
   margin-top: -6%;
-  margin-left: 42%;
+  margin-left: 41%;
   position: absolute;
 }
 
-section {
-  margin-left: 25%;
-  margin-top: 5%;
-  width: 50%;
+/* Main */
 
+main {
+  width: 50%;
+  background-color: white;
+  margin: auto;
 }
+
+h2 {
+  padding-top: 5%;
+  font-family: 'Gloria Hallelujah';
+}
+
+section {
+  width: 70%;
+  margin: auto;
+}
+
 #history {
   color: darkgreen;
 }
 
-.products {
-  color: red;
-  margin-left: 32.5%;
-  width: 35%;
+#history img {
+  width: 35vw;
 }
 
-.futureProducts {
+#history p img {
+  float: left;
+  width: 10vw;
+}
+
+.products {
+  color: red;
+}
+
+.products img {
+  height: 10vw;
+}
+
+.futureProducts h2 {
+  font-family: 'Sarala';
   color: midnightblue;
+}
+
+.futureProducts img {
+  width: 15vw;
+}
+
+/* Footer */
+
+footer {
+  /* outline: 2px dashed orange; */
+  text-align: center;
+  background-color: darkblue;
+  color: white;
+}
+
+#foot {
+  width: 70%;
+  margin: auto 10.3%;
+}
+
+footer li {
+  font-family: 'Gloria Hallelujah';
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 2px;
+  /* border: 2px solid black; */
+}
+
+footer li li {
+  border: 2px solid black;
+  text-align: center;
+  margin: 5px;
+  
+}
+
+footer li li:hover {
+  background-color: salmon;
 }
 
 /* For the Sales HTML */
@@ -96,6 +130,7 @@ section {
 .salesHeader {
   text-align: center;
   font-family: 'Gloria Hallelujah';
+  padding-top: 0%;
 }
 
 table {
